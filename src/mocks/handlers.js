@@ -1,0 +1,48 @@
+import { rest } from 'msw';
+
+export const handlers = [
+	rest.get('/recipes', (req, res, ctx) => {
+		return res(ctx.json(recipes));
+	}),
+];
+
+const recipes = [
+	{
+		id: 1,
+		category: 'Desserts',
+		name: 'Chewy Brown Sugar Cookies',
+		description: 'Super soft and chewy brown sugar cookies—no mixer required!',
+		image:
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/SugarCookie.JPG/640px-SugarCookie.JPG',
+		ingredients:
+			'2 cups (250g) all-purpose flour (spooned & leveled)\n1 teaspoon baking soda\n1 and 1/2 teaspoons cornstarch\n1/2 teaspoon ground cinnamon (use 1 teaspoon if you love cinnamon)\n1/4 teaspoon salt\n3/4 cup (12 Tbsp; 170g) unsalted butter, melted and slightly cooled\n1 and 1/4 cups (250g) packed light or dark brown sugar\n1 large egg, room temperature\n2 teaspoons pure vanilla extract\n1/3 cup (67g) granulated sugar, for rolling',
+		instructions:
+			'Toss together the flour, baking soda, cornstarch, cinnamon, and salt in a large bowl. Set aside.\nIn a medium size bowl, whisk the melted butter and brown sugar together until no brown sugar lumps remain. Whisk in the egg. Finally, whisk in the vanilla. Pour the wet ingredients into the dry ingredients and mix together with a large spoon or rubber spatula. The dough will be very soft, yet thick. Cover the dough and chill for 2 hours, or up to 3 days. Chilling is mandatory.\nTake the dough out of the refrigerator and allow to slightly soften at room temperature for 10 minutes if you had it chilling for more than 2 hours.\nPreheat the oven to 325°F (163°C). Line two large baking sheets with parchment paper or silicone baking mats. Set aside.\nPour the granulated sugar into a bowl. Take 2 scant Tablespoons of dough and roll into a ball, then roll into the sugar. Place 3 inches apart on the baking sheets.\nBake for 8-9 minutes. Remove from the oven and gently press the top of the cookie down with the back of a utensil or even use your fingers. You’re trying to obtain a crinkly top. Place back into the oven for 2-4 more minutes. The total time these cookies are in the the oven is 10-13 minutes. The cookies will be puffy and still appear very soft in the middle. Remove from the oven and allow to cool on the baking sheet for ten minutes before transferring to a wire rack to cool completely. They will continue to cook in the center on the baking sheet after being removed from the oven.\nCookies will stay fresh covered at room temperature for 1 week.',
+	},
+	{
+		id: 2,
+		category: 'Desserts',
+		name: 'Classic Cheesecake',
+		description:
+			'Look no further for a creamy and ultra smooth classic cheesecake recipe! Paired with a buttery graham cracker crust, no one can deny its simple decadence. For the best results, bake in a water bath.',
+		image:
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/My_first_cheesecake_cropped.jpg/220px-My_first_cheesecake_cropped.jpg',
+		ingredients:
+			'Graham Cracker Crust: 1 1/2 cups (180g) graham cracker crumbs (about 12 full sheet graham crackers)\n1/4 cup (50g) granulated sugar\n5 Tablespoons (71g) unsalted butter, melted\nCheesecake filling:\n32 ounces (904g) full-fat cream cheese, softened to room temperature\n1 cup (200g) granulated sugar\n1 cup (240g) full-fat sour cream, at room temperature\n1 teaspoon pure vanilla extract\n2 teaspoons fresh lemon juice (optional, but recommended)\n3 large eggs, at room temperature',
+		instructions:
+			'Adjust the oven rack to the lower-middle position and preheat oven to 350°F (177°C).\nMake the crust: If you’re starting out with full graham crackers, use a food processor or blender to grind them into fine crumbs. Pour into a medium bowl and stir in sugar until combined, and then stir in the melted butter. Mixture will be sandy. Try to smash/break up any large chunks. Pour into an ungreased 9-inch or 10-inch springform pan. With medium pressure using your hand, pat the crumbs down into the bottom and partly up the sides to make a compact crust. Do not pack down with heavy force because that makes the crust too hard. Simply pat down until the mixture is no longer crumby/crumbly and you can use the flat bottom of a small measuring cup to help smooth it all out if needed. Pre-bake for 10 minutes. Remove from the oven and place the hot pan on a large piece of aluminum foil. The foil will wrap around the pan for the water bath. Allow crust to slightly cool as you prepare the filling.\nMake the filling: Using a handheld or stand mixer fitted with a paddle attachment, beat the cream cheese and granulated sugar together on medium-high speed in a large bowl until the mixture is smooth and creamy, about 2 minutes. Add the sour cream, vanilla extract, and lemon juice then beat until fully combined. On medium speed, add the eggs one at a time, beating after each addition until just blended. After the final egg is incorporated into the batter, stop mixing. To help prevent the cheesecake from deflating and cracking as it cools, avoid over-mixing the batter as best you can. You will have close to 6 cups of batter.\nPrepare the simple water bath: Watch my video tutorial below; the visual guide will assist you in this step. Boil a pot of water. You need 1 inch of water in your roasting pan for the water bath, so make sure you boil enough. I use an entire kettle of hot water. As the water is heating up, wrap the aluminum foil around the springform pan. Place the pan inside of a large roasting pan. Pour the cheesecake batter on top of the crust. Use a rubber spatula or spoon to smooth it into an even layer. Carefully pour the hot water inside of the pan and place in the oven. (Or you can place the roasting pan in the oven first, then pour the hot water in. Whichever is easier for you.)\nBake cheesecake for 55–70 minutes or until the center is almost set. If you notice the cheesecake browning too quickly on top, tent it with aluminum foil halfway through baking. When it’s done, the center of the cheesecake will slightly wobble if you gently shake the pan. Turn the oven off and open the oven door slightly. Let the cheesecake sit in the oven in the water bath as it cools down for 1 hour. Remove from the oven and water bath, then cool cheesecake completely uncovered at room temperature. Then cover and refrigerate the cheesecake for at least 4 hours or overnight.\nUse a knife to loosen the chilled cheesecake from the rim of the springform pan, then remove the rim. Using a clean sharp knife, cut into slices for serving. For neat slices, wipe the knife clean and dip into warm water between each slice.\nServe cheesecake with desired toppings. Cover and store leftover cheesecake in the refrigerator for up to 5 days.',
+	},
+	{
+		id: 3,
+		category: 'Desserts',
+		name: 'Matcha Cookies',
+		description:
+			'Enjoy your afternoon tea with these crisp and buttery Matcha Cookies. The unique flavor combination of matcha and white chocolate is surprisingly delightful!',
+		image:
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Matcha_cookies.jpg/640px-Matcha_cookies.jpg',
+		ingredients:
+			'2 cups all-purpose flour 2½ Tbsp matcha green tea powder (1 Tbsp matcha is 6 g) ¾ cup unsalted butter (softened, at room temperature) 1 pinch Diamond Crystal kosher salt 130 g confectioners’ sugar (1 cup + 2 tsp) 2 large egg yolks (at room temperature) ¼ cup white chocolate chips',
+		instructions:
+			'Combine 2 cups all-purpose flour (plain flour) and 2½ Tbsp matcha green tea powder in a large bowl. Sift the flour and the matcha powder. In a stand mixer with a paddle attachment or in a large bowl with a hand mixer, beat ¾ cup unsalted butter until smooth and creamy. Tip: It’s important to soften the butter ahead of time. Leave the butter out on the counter for 1 hour or microwave it in 5-second increments until it‘s softened. Add 1 pinch Diamond Crystal kosher salt and blend. Add 130 g confectioners’ sugar (1 cup + 2 tsp) and beat well until soft and light. As you blend, stop the mixer and scrape down the bowl occasionally. Add 2 large egg yolks and mix well until combined. Gradually add the flour and matcha mixture and mix until just combined. Add ¼ cup white chocolate chips and mix until just incorporated. Divide the dough into 2 equal pieces. Shape each piece into a cylinder about 1½ inches (4 cm) in diameter and 7 inches (18 cm) long. Wrap the logs in plastic wrap and chill in the refrigerator until firm, at least 2 hours. Tip: You can place the logs on a bed of uncooked rice while chilling. It’ll keep the dough in a nice cylindrical shape so your cookie slices won’t be flat on one side. To Freeze for Later: You can also freeze the unbaked logs of dough, wrapped in plastic wrap, for up to 2 months. To bake, let sit at room temperature for about 10 minutes before cutting and baking. Do not let the dough fully defrost. Preheat the oven to 350ºF (175ºC). For a convection oven, reduce the cooking temperature by 25ºF (15ºC). Line a baking sheet with parchment paper or a silicone baking liner. Remove the dough from the refrigerator and unwrap the plastic wrap. Use a sharp knife to slice the dough into rounds about ⅓ inch (7 mm) thick. If the dough is too hard to slice, wait 5 minutes or so before slicing. Place the sliced dough on the baking sheet, leaving about 1 inch (2.5 cm) of space between the rounds. Bake the cookies at 350ºF (175ºC) for about 15 minutes, or until the edges of the cookies start to get slightly golden brown. Remove from the oven and let the cookies cool on the baking sheet for 5 minutes; then carefully transfer the cookies to a wire cooling rack and let them cool completely before serving. You can keep the cooled cookies in an airtight container and store them at room temperature for at least 4 days.',
+	},
+];

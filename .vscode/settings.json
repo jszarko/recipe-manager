@@ -1,0 +1,8 @@
+{
+	"jest.jestCommandLine": "pnpm jest",
+	"jest.runMode": {
+		"type": "on-save",
+		"testFileOnly": true,
+		"coverage": true
+	}
+}

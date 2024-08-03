@@ -1,0 +1,28 @@
+/* * {
+	margin: 0;
+	padding: 0;
+	box-sizing: boarder-box;
+	font-family: 'Roboto';
+} */
+
+.full-container {
+	max-width: 100%;
+	padding: 0 1rem;
+}
+
+.container,
+.small-container,
+.medium-container {
+	max-width: 1200px;
+	padding: 0 1rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.small-container {
+	max-width: 800px;
+}
+
+.medium-container {
+	max-width: 1000px;
+}
