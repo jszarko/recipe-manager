@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { searchRecipes, getCategory } from '../data/recipe-queries';
@@ -13,27 +13,36 @@ import Pagination from '@mui/material/Pagination';
 import Box from '@mui/material/Box';
 
 const Recipes = () => {
-	const [searchString, setSearchString] = useState('');
-	const [pageNumber, setPageNumber] = useState(1);
-	const [recordsPerPage] = useState(20);
 	// useParams hook to extract categoryId parameter from the URL
 	const { categoryId } = useParams();
+	const [searchString, setSearchString] = useState('');
+	const [pageNumber, setPageNumber] = useState(1);
+	const [selectedCategory, setSelectedCategory] = useState(categoryId);
+	const [recordsPerPage] = useState(20);
 
 	const {
 		data: searchResults,
 		isLoading,
 		isError,
 	} = useQuery(
-		['search', searchString, categoryId, pageNumber, recordsPerPage],
+		['search', searchString, selectedCategory, pageNumber, recordsPerPage],
 		async () =>
-			await searchRecipes(searchString, categoryId, pageNumber, recordsPerPage)
+			await searchRecipes(
+				searchString,
+				selectedCategory,
+				pageNumber,
+				recordsPerPage
+			)
 	);
 
-	const { data: category } = useQuery(['category', categoryId], () =>
-		getCategory(categoryId)
+	const { data: category } = useQuery(
+		['category', selectedCategory],
+		() => selectedCategory && getCategory(selectedCategory)
 	);
 
 	const onSearch = searchText => {
+		// reset to page 1 on searches
+		setPageNumber(1);
 		setSearchString(searchText);
 	};
 
@@ -41,6 +50,12 @@ const Recipes = () => {
 	const handlePageChange = (event, value) => {
 		setPageNumber(value);
 	};
+
+	useEffect(() => {
+		// reset to page 1 anytime a user changes the category filter
+		setPageNumber(1);
+		setSelectedCategory(categoryId);
+	}, [categoryId]);
 
 	const renderRecipeResults = results =>
 		results && results.length > 0 ? (
@@ -78,7 +93,7 @@ const Recipes = () => {
 				)}
 				<Stack spacing={2}>
 					<SearchRecipe onSearchChange={onSearch} />
-					{categoryId && (
+					{selectedCategory && (
 						<Typography
 							variant="h5"
 							color="primary.dark"

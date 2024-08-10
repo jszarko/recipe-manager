@@ -17,11 +17,8 @@ const NestedNavItems = ({ name }) => {
 	};
 
 	const handleMenuClose = () => {
-		// set timeout so that the menu doesn't close before the user has a time to move the mouse over it
-		setTimeout(() => {
-			setAnchorEl(null);
-			setHoverColor(false);
-		}, 3000);
+		setAnchorEl(null);
+		setHoverColor(false);
 	};
 
 	return (
@@ -29,8 +26,6 @@ const NestedNavItems = ({ name }) => {
 			<Button
 				aria-haspopup="true"
 				aria-expanded={openMenu ? 'true' : 'false'}
-				onMouseEnter={handleMenuOpen}
-				onMouseLeave={handleMenuClose}
 				onClick={handleMenuOpen}
 				sx={{
 					my: 2,
