@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // create a custom instance of Axios to be reused across multiple API calls
 const api = axios.create({
-	baseURL: 'https://localhost:7066/api',
+	baseURL: `${process.env.REACT_APP_RECIPEAPI_URL}`,
 });
 
 export const getRecipes = async () => (await api.get(`/Recipe`)).data;
