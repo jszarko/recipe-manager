@@ -33,10 +33,6 @@ jest.mock('../data/recipe-queries', () => ({
 }));
 
 describe('RecipesMenu', () => {
-	afterEach(() => {
-		jest.restoreAllMocks();
-	});
-
 	it('renders RecipesMenu', () => {
 		renderWithClient(<RecipesMenu />);
 	});

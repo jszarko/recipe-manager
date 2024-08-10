@@ -16,7 +16,9 @@ const mockNavItems = {
 
 describe('SingleLevelNavItems', () => {
 	it('renders SingleLevelNavItems', async () => {
-		render(<SingleLevelNavItems item={mockNavItems} />);
+		render(
+			<SingleLevelNavItems name={mockNavItems.name} path={mockNavItems.path} />
+		);
 		expect(mockNavItems).toEqual(
 			expect.objectContaining({
 				name: 'Recipes',
@@ -27,18 +29,24 @@ describe('SingleLevelNavItems', () => {
 	});
 
 	it('renders nav item', async () => {
-		render(<SingleLevelNavItems item={mockNavItems} />);
+		render(
+			<SingleLevelNavItems name={mockNavItems.name} path={mockNavItems.path} />
+		);
 		expect(screen.getByRole('button', { name: 'Recipes' })).toBeInTheDocument();
 	});
 
 	it('does not render expand icon', async () => {
-		render(<SingleLevelNavItems item={mockNavItems} />);
+		render(
+			<SingleLevelNavItems name={mockNavItems.name} path={mockNavItems.path} />
+		);
 		expect(screen.queryByTestId('ExpandMoreIcon')).not.toBeInTheDocument();
 	});
 
 	it('redirects to selected nav item page on click', async () => {
 		const user = userEvent.setup();
-		render(<SingleLevelNavItems item={mockNavItems} />);
+		render(
+			<SingleLevelNavItems name={mockNavItems.name} path={mockNavItems.path} />
+		);
 		await user.click(screen.getByRole('button', { name: 'Recipes' }));
 		expect(mockUseNavigate).toHaveBeenCalledWith('/recipes');
 	});

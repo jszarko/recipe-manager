@@ -1,8 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import NavBar from './NavBar';
-import NavMenu from './NavMenu';
-import NestedNavItems from './NestedNavItems';
-import SingleLevelNavItems from './SingleLevelNavItems';
 
 jest.mock('./NavMenu', () => () => <div data-testid="NavMenu" />);
 
@@ -32,13 +29,21 @@ describe('NavBar', () => {
 		expect(screen.queryByTestId('MenuIcon')).not.toBeInTheDocument();
 	});
 
-	it('renders logo', async () => {
+	it('renders logo with a link to Home page', async () => {
 		render(<NavBar />);
-		expect(screen.getByTestId('AnimationIcon')).toBeInTheDocument();
+
+		const logo = screen.getByRole('img', { name: /logo/i });
+		expect(logo).toBeInTheDocument();
+		expect(logo.alt).toContain('Logo');
+		expect(screen.getByRole('link', { name: /logo/i })).toHaveAttribute(
+			'href',
+			'/'
+		);
 	});
 
 	it('renders site name with a link to Home page', async () => {
 		render(<NavBar />);
+
 		const siteName = screen.getByRole('link', { name: /recipe manager/i });
 		expect(siteName).toBeInTheDocument();
 		expect(siteName).toHaveAttribute('href', '/');

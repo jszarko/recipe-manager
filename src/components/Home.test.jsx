@@ -43,6 +43,8 @@ jest.mock('../data/recipe-queries', () => ({
 
 jest.mock('./RecipeListSkeleton');
 
+jest.mock('./CategoryList', () => () => <div data-testid="CategoryList" />);
+
 describe('Home', () => {
 	afterEach(() => {
 		jest.resetAllMocks();
@@ -94,5 +96,11 @@ describe('Home', () => {
 
 		await expect(RecipeListSkeleton).toHaveBeenCalled();
 		await expect(RecipeListSkeleton).toHaveReturnedWith(4);
+	});
+
+	it('renders CategoryList component', async () => {
+		renderWithClient(<Home />);
+
+		expect(screen.getByTestId('CategoryList')).toBeInTheDocument();
 	});
 });

@@ -1,11 +1,10 @@
 import { menuItems } from '../utils/menu-items';
 import NavMenu from './NavMenu';
-import SingleLevelNavItems from './SingleLevelNavItems.jsx';
-import NestedNavItems from './NestedNavItems.jsx';
+import SingleLevelNavItems from './SingleLevelNavItems';
+import NestedNavItems from './NestedNavItems';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
-import AnimationIcon from '@mui/icons-material/Animation';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -23,13 +22,16 @@ const NavBar = () => {
 					>
 						<NavMenu />
 					</Box>
-					<AnimationIcon sx={{ mr: 1, color: 'primary.dark' }} />
+					<a href="/">
+						<img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" />
+					</a>
 					<Typography
 						variant="h5"
 						noWrap
 						component="a"
 						href="/"
 						sx={{
+							ml: 1,
 							mr: 6,
 							flexGrow: 1,
 							display: 'flex',

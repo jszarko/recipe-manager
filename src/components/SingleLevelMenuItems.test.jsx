@@ -23,11 +23,12 @@ describe('SingleLevelMenuItems', () => {
 	it('renders SingleLevelMenuItems', async () => {
 		render(
 			<SingleLevelMenuItems
-				item={mockMenuItems}
+				name={mockMenuItems.name}
+				path={mockMenuItems.path}
+				icon={mockMenuItems.icon}
 				toggleDrawer={mockToggleDrawer}
 			/>
 		);
-
 		expect(mockMenuItems).toEqual(
 			expect.objectContaining({
 				name: 'List Recipes',
@@ -42,7 +43,7 @@ describe('SingleLevelMenuItems', () => {
 	it('renders menu item icon', async () => {
 		render(
 			<SingleLevelMenuItems
-				item={mockMenuItems}
+				icon={mockMenuItems.icon}
 				toggleDrawer={mockToggleDrawer}
 			/>
 		);
@@ -52,7 +53,7 @@ describe('SingleLevelMenuItems', () => {
 	it('renders menu item name', async () => {
 		render(
 			<SingleLevelMenuItems
-				item={mockMenuItems}
+				name={mockMenuItems.name}
 				toggleDrawer={mockToggleDrawer}
 			/>
 		);
@@ -62,7 +63,7 @@ describe('SingleLevelMenuItems', () => {
 	it('does not render expand icon', async () => {
 		render(
 			<SingleLevelMenuItems
-				item={mockMenuItems}
+				name={mockMenuItems.name}
 				toggleDrawer={mockToggleDrawer}
 			/>
 		);
@@ -73,7 +74,8 @@ describe('SingleLevelMenuItems', () => {
 		const user = userEvent.setup();
 		render(
 			<SingleLevelMenuItems
-				item={mockMenuItems}
+				name={mockMenuItems.name}
+				path={mockMenuItems.path}
 				toggleDrawer={mockToggleDrawer}
 			/>
 		);

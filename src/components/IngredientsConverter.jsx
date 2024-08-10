@@ -52,7 +52,7 @@ const IngredientsConverter = () => {
 	const theme = useTheme();
 
 	const handleValueChange = e => {
-		if (e.target.value.match(/[^0-9.]/)) {
+		if (!e.target.value.match(/^[0-9]{0,6}$|^[0-9]{0,6}\.[0-9]{0,4}$/)) {
 			return e.preventDefault();
 		}
 		setValue(e.target.value);

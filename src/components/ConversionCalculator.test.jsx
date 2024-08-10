@@ -1,7 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import ConversionCalculator from './ConversionCalculator';
-import IngredientsConverter from './IngredientsConverter';
-import TemperatureConverter from './TemperatureConverter';
 
 jest.mock('./IngredientsConverter', () => {
 	const IngredientsConverter = () => <div data-testid="IngredientsConverter" />;

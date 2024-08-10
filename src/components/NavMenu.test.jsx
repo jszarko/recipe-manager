@@ -1,8 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import NavMenu from './NavMenu';
-import NestedMenuItems from './NestedMenuItems';
-import SingleLevelMenuItems from './SingleLevelMenuItems';
 
 jest.mock('./NestedMenuItems', () => ({
 	__esModule: true,
@@ -15,10 +13,6 @@ jest.mock('./SingleLevelMenuItems', () => ({
 }));
 
 describe('NavMenu', () => {
-	afterEach(() => {
-		jest.restoreAllMocks();
-	});
-
 	it('renders NavMenu', () => {
 		render(<NavMenu />);
 	});
@@ -58,7 +52,6 @@ describe('NavMenu', () => {
 		expect(
 			screen.queryByRole('button', { name: /recipes/i })
 		).not.toBeInTheDocument();
-		NestedMenuItems.mockRestore();
 	});
 
 	it('renders SingleLevelMenuItems component', async () => {
@@ -71,6 +64,13 @@ describe('NavMenu', () => {
 		expect(
 			screen.queryByRole('button', { name: /add recipe/i })
 		).not.toBeInTheDocument();
-		SingleLevelMenuItems.mockRestore();
+	});
+
+	it('closes sidebar on close button click', async () => {
+		const user = userEvent.setup();
+		render(<NavMenu />);
+		await user.click(screen.getByRole('button', { name: /menu/i }));
+		await user.click(screen.getByTestId('CloseIcon'));
+		expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
 	});
 });

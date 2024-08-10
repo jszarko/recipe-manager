@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { element, func, shape, string } from 'prop-types';
+import { element, func, string } from 'prop-types';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';

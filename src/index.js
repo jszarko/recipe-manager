@@ -1,6 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-// import './index.css';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
 if (process.env.NODE_ENV === 'development') {
@@ -8,9 +7,9 @@ if (process.env.NODE_ENV === 'development') {
 	// worker.start(); // disabled MSW because of security issues with firefox
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById('root'));
 root.render(
-	<React.StrictMode>
+	<StrictMode>
 		<App />
-	</React.StrictMode>
+	</StrictMode>
 );
