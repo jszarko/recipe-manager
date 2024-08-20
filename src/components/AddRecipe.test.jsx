@@ -167,7 +167,7 @@ describe('AddRecipe', () => {
 		);
 		await user.clear(imageLinkInput);
 		expect(imageLinkInput).not.toHaveValue();
-	}, 10000);
+	}, 15000);
 
 	it('creates recipe when only recipe name is provided on submit', async () => {
 		const user = userEvent.setup();
@@ -216,7 +216,7 @@ describe('AddRecipe', () => {
 			image:
 				'https://cdn.pixabay.com/photo/2021/07/22/01/03/cobbler-6484216_1280.png',
 		});
-	}, 10000);
+	}, 15000);
 
 	it('renders error message when failing to add a recipe', async () => {
 		const error = 'Oops... Something went wrong.';

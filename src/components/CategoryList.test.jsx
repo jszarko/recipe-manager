@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import { renderWithClient } from '../utils/test-query-client';
-import { getCategories } from '../data/recipe-queries';
+import * as ReactQuery from 'react-query';
 import CategoryList from './CategoryList';
 import RecipeListSkeleton from './RecipeListSkeleton';
 
@@ -25,33 +25,29 @@ const mockCategories = [
 	},
 ];
 
-jest.mock('../data/recipe-queries', () => ({
-	__esModule: true,
-	...jest.requireActual('../data/recipe-queries'),
-	getCategories: jest.fn(),
-}));
+const useQuerySpy = jest.spyOn(ReactQuery, 'useQuery');
 
 jest.mock('./RecipeListSkeleton');
 
 describe('CategoryList', () => {
 	afterEach(() => {
-		jest.restoreAllMocks();
+		jest.resetAllMocks();
 	});
 
 	it('renders CategoryList', async () => {
-		getCategories.mockReturnValue(mockCategories);
+		useQuerySpy.mockReturnValue({ data: mockCategories, isLoading: false });
 		renderWithClient(<CategoryList />);
 
-		expect(await screen.findByText('Breakfast')).toBeInTheDocument();
+		expect(screen.getByText('Breakfast')).toBeInTheDocument();
 		expect(screen.getByText('Lunch/Dinner')).toBeInTheDocument();
 		expect(screen.getByText('Dessert')).toBeInTheDocument();
 	});
 
 	it('renders category image', async () => {
-		getCategories.mockReturnValue(mockCategories);
+		useQuerySpy.mockReturnValue({ data: mockCategories, isLoading: false });
 		renderWithClient(<CategoryList />);
 
-		const backgrounds = await screen.findAllByTestId('category-image');
+		const backgrounds = screen.getAllByTestId('category-image');
 		expect(backgrounds).toHaveLength(3);
 		expect(backgrounds[0]).toHaveStyle(
 			`backgroundImage: url(${mockCategories[0].image})`
@@ -65,12 +61,13 @@ describe('CategoryList', () => {
 	});
 
 	it('redirects to a page with recipes of the selected category on click', async () => {
-		getCategories.mockReturnValue(mockCategories);
+		useQuerySpy.mockReturnValue({ data: mockCategories, isLoading: false });
 		renderWithClient(<CategoryList />);
 
-		expect(
-			await screen.findByRole('link', { name: 'Breakfast' })
-		).toHaveAttribute('href', '/recipes/category/100');
+		expect(screen.getByRole('link', { name: 'Breakfast' })).toHaveAttribute(
+			'href',
+			'/recipes/category/100'
+		);
 		expect(screen.getByRole('link', { name: 'Lunch/Dinner' })).toHaveAttribute(
 			'href',
 			'/recipes/category/101'
@@ -83,6 +80,7 @@ describe('CategoryList', () => {
 
 	it('renders loading skeleton before categories get loaded', async () => {
 		RecipeListSkeleton.mockReturnValue(8);
+		useQuerySpy.mockReturnValue({ isLoading: true });
 		renderWithClient(<CategoryList />);
 
 		expect(RecipeListSkeleton).toHaveBeenCalled();

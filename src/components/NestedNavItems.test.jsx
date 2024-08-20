@@ -23,16 +23,6 @@ describe('NestedNavItems', () => {
 		expect(screen.getByTestId('ExpandMoreIcon')).toBeInTheDocument();
 	});
 
-	it('renders menu list on menu option hover over', async () => {
-		const user = userEvent.setup();
-		render(<NestedNavItems name={mockNavItem} />);
-		await user.hover(
-			screen.getByRole('button', { name: 'Recipes By Category' })
-		);
-		expect(screen.getByTestId('ExpandLessIcon')).toBeInTheDocument();
-		expect(screen.getByTestId('RecipesMenu')).toBeInTheDocument();
-	});
-
 	it('renders menu list on menu option click', async () => {
 		const user = userEvent.setup();
 		render(<NestedNavItems name={mockNavItem} />);

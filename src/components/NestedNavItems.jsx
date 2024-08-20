@@ -32,6 +32,10 @@ const NestedNavItems = ({ name }) => {
 					color: hoverColor ? 'primary.light' : 'primary.dark',
 					fontWeight: 'bold',
 					textTransform: 'none',
+					':hover': {
+						color: 'primary.light',
+						bgcolor: 'transparent',
+					},
 				}}
 				endIcon={openMenu ? <ExpandLess /> : <ExpandMore />}
 			>

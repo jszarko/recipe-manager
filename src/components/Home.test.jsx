@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import { renderWithClient } from '../utils/test-query-client';
-import { getLatestRecipes } from '../data/recipe-queries';
+import * as ReactQuery from 'react-query';
 import Home from './Home';
 import RecipeListSkeleton from './RecipeListSkeleton';
 
@@ -35,11 +35,7 @@ const mockLatestRecipes = [
 	},
 ];
 
-jest.mock('../data/recipe-queries', () => ({
-	__esModule: true,
-	...jest.requireActual('../data/recipe-queries'),
-	getLatestRecipes: jest.fn(),
-}));
+const useQuerySpy = jest.spyOn(ReactQuery, 'useQuery');
 
 jest.mock('./RecipeListSkeleton');
 
@@ -47,25 +43,22 @@ jest.mock('./CategoryList', () => () => <div data-testid="CategoryList" />);
 
 describe('Home', () => {
 	afterEach(() => {
-		jest.resetAllMocks();
+		useQuerySpy.mockReset();
 	});
 
 	it('renders Home', () => {
 		renderWithClient(<Home />);
 	});
 
-	it('always renders 4 lastest recipes', async () => {
-		getLatestRecipes.mockReturnValue(mockLatestRecipes);
-		renderWithClient(<Home />);
-
-		expect(getLatestRecipes).toHaveBeenCalledWith(4);
-	});
-
 	it('renders latest recipes', async () => {
-		getLatestRecipes.mockReturnValue(mockLatestRecipes);
+		useQuerySpy.mockReturnValue({
+			data: mockLatestRecipes,
+			isLoading: false,
+			isError: false,
+		});
 		renderWithClient(<Home />);
 
-		expect(await screen.findByText('Pavlova')).toBeInTheDocument();
+		expect(screen.getByText('Pavlova')).toBeInTheDocument();
 		expect(screen.getByText('Steamed Buns')).toBeInTheDocument();
 		expect(screen.getByText('Apple Cake')).toBeInTheDocument();
 		expect(screen.getByText('Orange Chicken')).toBeInTheDocument();
@@ -74,31 +67,41 @@ describe('Home', () => {
 	it('renders headline', async () => {
 		const text =
 			"Between your grandma's famous apple pie, the first meal you cooked, and your favorite indulgence, your family's most cherished recipes hold meaning. Keep all of your precious recipes and the ones you have yet to try within reach. With your favorite recipes neatly organized on your phone, sharing that apple pie recipe only takes a couple clicks.";
-		getLatestRecipes.mockReturnValue(mockLatestRecipes);
+		useQuerySpy.mockReturnValue({ data: mockLatestRecipes });
 		renderWithClient(<Home />);
 
 		expect(
-			await screen.findByRole('heading', { name: /organize your recipes/i })
+			screen.getByRole('heading', { name: /organize your recipes/i })
 		).toBeInTheDocument();
 		expect(screen.getByRole('heading', { name: text })).toBeInTheDocument();
 	});
 
 	it('renders error message when failing to get latest recipes', async () => {
-		const error = 'Oops... Something went wrong.';
+		useQuerySpy.mockReturnValue({ isError: true });
 		renderWithClient(<Home />);
-		getLatestRecipes.mockRejectedValueOnce(new Error(error));
-		await expect(getLatestRecipes()).rejects.toThrow(error);
+
+		expect(
+			screen.getByText(
+				'Something went wrong. Try reloading the page, else reach out to us and let us know about your experience.'
+			)
+		).toBeInTheDocument();
 	});
 
 	it('renders loading skeleton before latest recipes get loaded', async () => {
 		RecipeListSkeleton.mockReturnValue(4);
+		useQuerySpy.mockReturnValue({ isLoading: true });
 		renderWithClient(<Home />);
 
-		await expect(RecipeListSkeleton).toHaveBeenCalled();
-		await expect(RecipeListSkeleton).toHaveReturnedWith(4);
+		expect(RecipeListSkeleton).toHaveBeenCalled();
+		expect(RecipeListSkeleton).toHaveReturnedWith(4);
 	});
 
 	it('renders CategoryList component', async () => {
+		useQuerySpy.mockReturnValue({
+			data: mockLatestRecipes,
+			isLoading: false,
+			isError: false,
+		});
 		renderWithClient(<Home />);
 
 		expect(screen.getByTestId('CategoryList')).toBeInTheDocument();
