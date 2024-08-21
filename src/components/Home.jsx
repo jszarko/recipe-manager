@@ -65,6 +65,7 @@ const Home = () => {
 						sx={{
 							[theme.breakpoints.down('md')]: {
 								fontSize: '1rem',
+								fontWeight: 400,
 							},
 						}}
 					>
@@ -99,12 +100,8 @@ const Home = () => {
 					<CircleIcon
 						sx={{
 							color: 'secondary.light',
-							[theme.breakpoints.up('sm')]: {
-								fontSize: '100px',
-							},
-							[theme.breakpoints.down('sm')]: {
-								fontSize: '50px',
-							},
+							fontSize: '100px',
+							display: { xs: 'none', sm: 'flex' },
 							mt: 4.5,
 							position: 'absolute',
 							right: '1.5px',

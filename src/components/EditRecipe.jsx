@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTheme } from '@mui/material';
 import { getCategories, updateRecipe } from '../data/recipe-queries';
 import { useQuery, useMutation } from 'react-query';
 import { func, number, shape, string } from 'prop-types';
@@ -20,6 +21,7 @@ import 'react-quill/dist/quill.snow.css';
 import { modules, formats } from './quill-configuration';
 
 const EditRecipe = ({ recipe, onSave }) => {
+	const theme = useTheme();
 	const [open, setOpen] = useState(false);
 	const [values, setValues] = useState({ ...recipe });
 	const [error, setError] = useState(false);
@@ -102,7 +104,17 @@ const EditRecipe = ({ recipe, onSave }) => {
 				open={open}
 				aria-labelledby="dialog-title"
 			>
-				<DialogTitle id="dialog-title" color="primary" fontSize="34px">
+				<DialogTitle
+					id="dialog-title"
+					color="primary"
+					fontSize="34px"
+					sx={{
+						[theme.breakpoints.down('md')]: {
+							fontSize: '1.5rem',
+							lineHeight: '1.25',
+						},
+					}}
+				>
 					Update the {values?.name} recipe
 				</DialogTitle>
 				<DialogContent>

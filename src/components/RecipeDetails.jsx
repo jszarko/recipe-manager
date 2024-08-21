@@ -66,7 +66,10 @@ const RecipeDetails = () => {
 											fontWeight="bold"
 											gutterBottom={true}
 											sx={{
-												[theme.breakpoints.down('md')]: { fontSize: '1.25rem' },
+												[theme.breakpoints.down('md')]: {
+													fontSize: '1.25rem',
+													lineHeight: '1.25',
+												},
 											}}
 										>
 											{recipe?.name}
@@ -77,6 +80,7 @@ const RecipeDetails = () => {
 											sx={{
 												[theme.breakpoints.down('md')]: {
 													fontSize: '0.875rem',
+													lineHeight: '1.25',
 												},
 											}}
 										>

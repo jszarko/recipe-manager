@@ -19,7 +19,7 @@ const FormattedRecipeSection = ({ title, bodyHtml }) => {
 			</Typography>
 			<Typography
 				sx={{
-					[theme.breakpoints.down('md')]: { fontSize: '0.75rem' },
+					[theme.breakpoints.down('md')]: { fontSize: '.875rem' },
 				}}
 			>
 				<span dangerouslySetInnerHTML={{ __html: bodyHtml }} />

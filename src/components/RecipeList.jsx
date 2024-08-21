@@ -35,6 +35,7 @@ const RecipeList = ({ recipes }) => {
 										sx={{
 											[theme.breakpoints.down('md')]: {
 												fontSize: '1rem',
+												lineHeight: '1.25',
 											},
 											':hover': { color: 'primary.dark' },
 										}}

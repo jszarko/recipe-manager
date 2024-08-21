@@ -1,3 +1,4 @@
+import { useTheme } from '@mui/material';
 import { menuItems } from '../utils/menu-items';
 import NavMenu from './NavMenu';
 import SingleLevelNavItems from './SingleLevelNavItems';
@@ -10,6 +11,7 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 
 const NavBar = () => {
+	const theme = useTheme();
 	return (
 		<AppBar color="background">
 			<Container>
@@ -39,6 +41,9 @@ const NavBar = () => {
 							fontWeight: 'bold',
 							color: 'primary.dark',
 							textDecoration: 'none',
+							[theme.breakpoints.down('sm')]: {
+								fontSize: '1.3rem',
+							},
 						}}
 					>
 						Recipe Manager
