@@ -71,7 +71,11 @@
 			"ejs": "^3.1.10",
 			"express": "^4.19.2",
 			"follow-redirects": "^1.15.6",
-			"postcss": "8.4.31"
+			"postcss": "8.4.31",
+			"rollup": "^2.79.2",
+			"http-proxy-middleware": "^2.0.7",
+			"path-to-regexp": "^0.1.10",
+			"body-parser": "^1.20.3"
 		}
 	}
 }
